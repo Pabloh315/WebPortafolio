@@ -90,6 +90,7 @@
             max-width: 500px;
             border-radius: 10px;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
         .image-section img:hover {
             transform: scale(1.1);
@@ -156,13 +157,24 @@
             font-style: italic;
             color: #BF7145;
         }
+
+        /* Colores de fondo de las reacciones */
+        .color-change-1 {
+            background-color: #f5a5d0;
+        }
+        .color-change-2 {
+            background-color: #e1c8e1;
+        }
+        .color-change-3 {
+            background-color: #d1f0c1;
+        }
     </style>
 </head>
 <body>
     <!-- Botón de menú hamburguesa -->
     <button id="menu-btn">☰</button>
     <div class="navbar" id="navbar">
-        <a href="#home">PRINCIPAL</a>
+        <a href="index.html">PRINCIPAL</a>
         <a href="habilidades.html">HABILIDADES</a>
         <a href="experiencia.html">EXPERIENCIA LABORAL</a>
         <a href="educacion.html">EDUCACIÓN Y CERTIFICACIONES</a>
@@ -170,7 +182,7 @@
     </div>
     <div id="home" class="container">
         <div class="image-section">
-            <img src="perfil-cv.png" alt="Adan Condori">
+            <img src="perfil-cv.png" alt="Adan Condori" onclick="changeBackgroundColor(1)">
         </div>
         <div class="text-section">
             <h1>Hola! Soy Adan Condori Callisaya.</h1>
@@ -183,7 +195,7 @@
                   por la innovación y la optimización de procesos, 
                   combina su expertise técnico con una gestión 
                   eficiente de proyectos bajo metodologías ágiles.</p>
-            <button>Más sobre mi</button>
+            <button><a href="habilidades.html"> Más sobre mi</a></button>
         </div>
     </div>
 
@@ -203,6 +215,31 @@
                 navbar.style.backgroundColor = "#456B53"; // Color original
             }
         });
+
+        // Función para cargar dinámicamente el contenido de cada sección
+        function loadSection(section) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', section + '.html', true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    document.getElementById('home').innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
+        }
+
+        // Función para cambiar el color de fondo al hacer clic en las imágenes
+        function changeBackgroundColor(colorNumber) {
+            var container = document.getElementById("home");
+            if (colorNumber === 1) {
+                container.className = "container color-change-1";
+            } else if (colorNumber === 2) {
+                container.className = "container color-change-2";
+            } else if (colorNumber === 3) {
+                container.className = "container color-change-3";
+            }
+        }
     </script>
 </body>
 </html>
+
